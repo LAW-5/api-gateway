@@ -1,6 +1,8 @@
 import { Body, Controller, Inject, OnModuleInit, Post } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
+import { LoginRequestDto, RegisterRequestDto } from './auth.dto';
 import {
   AuthServiceClient,
   AUTH_PACKAGE_NAME,
@@ -11,6 +13,7 @@ import {
   RegisterResponse,
 } from './auth.pb';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController implements OnModuleInit {
   private svc: AuthServiceClient;
@@ -23,6 +26,12 @@ export class AuthController implements OnModuleInit {
   }
 
   @Post('register')
+  @ApiBody({ description: 'Register request dto', type: RegisterRequestDto })
+  @ApiResponse({ status: 201, description: 'Succesfully register' })
+  @ApiResponse({
+    status: 409,
+    description: 'E-Mail already registered in other user',
+  })
   private async register(
     @Body() body: RegisterRequest,
   ): Promise<Observable<RegisterResponse>> {
@@ -30,6 +39,10 @@ export class AuthController implements OnModuleInit {
   }
 
   @Post('login')
+  @ApiBody({ description: 'Login request dto', type: LoginRequestDto })
+  @ApiResponse({ status: 201, description: 'Succesfully login' })
+  @ApiResponse({ status: 404, description: 'No user with given email' })
+  @ApiResponse({ status: 404, description: 'Wrong password' })
   private async login(
     @Body() body: LoginRequest,
   ): Promise<Observable<LoginResponse>> {
