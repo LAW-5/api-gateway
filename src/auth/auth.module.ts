@@ -12,7 +12,7 @@ import { AuthService } from './auth.service';
         name: AUTH_SERVICE_NAME,
         transport: Transport.GRPC,
         options: {
-          url: '0.0.0.0:5001',
+          url: process.env.AUTH_SERVICE,
           package: AUTH_PACKAGE_NAME,
           protoPath: 'node_modules/proto/auth.proto',
         },
