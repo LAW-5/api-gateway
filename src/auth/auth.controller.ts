@@ -54,6 +54,16 @@ export class AuthController implements OnModuleInit {
     return this.svc.login(body);
   }
 
+  @Post('registerMerchant')
+  @ApiBody({
+    description: 'Reqister merchant request dto',
+    type: RegisterMerchantDto,
+  })
+  @ApiResponse({ status: 201, description: 'Succesfully register' })
+  @ApiResponse({
+    status: 409,
+    description: 'E-Mail already registered in other user',
+  })
   private async registerMerchant(
     @Body() body: RegisterMerchantDto,
   ): Promise<Observable<RegisterMerchantResponse>> {
