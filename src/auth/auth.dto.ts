@@ -18,3 +18,14 @@ export class LoginRequestDto {
   @ApiProperty()
   password: string;
 }
+
+export class RegisterMerchantDto {
+  @ApiProperty()
+  email: string;
+
+  @ApiProperty()
+  merchantName: string;
+
+  @ApiProperty()
+  password: string;
+}

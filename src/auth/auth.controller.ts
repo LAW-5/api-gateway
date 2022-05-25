@@ -2,13 +2,18 @@ import { Body, Controller, Inject, OnModuleInit, Post } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
-import { LoginRequestDto, RegisterRequestDto } from './auth.dto';
+import {
+  LoginRequestDto,
+  RegisterMerchantDto,
+  RegisterRequestDto,
+} from './auth.dto';
 import {
   AuthServiceClient,
   AUTH_PACKAGE_NAME,
   AUTH_SERVICE_NAME,
   LoginRequest,
   LoginResponse,
+  RegisterMerchantResponse,
   RegisterRequest,
   RegisterResponse,
 } from './auth.pb';
@@ -47,5 +52,21 @@ export class AuthController implements OnModuleInit {
     @Body() body: LoginRequest,
   ): Promise<Observable<LoginResponse>> {
     return this.svc.login(body);
+  }
+
+  @Post('registerMerchant')
+  @ApiBody({
+    description: 'Reqister merchant request dto',
+    type: RegisterMerchantDto,
+  })
+  @ApiResponse({ status: 201, description: 'Succesfully register' })
+  @ApiResponse({
+    status: 409,
+    description: 'E-Mail already registered in other user',
+  })
+  private async registerMerchant(
+    @Body() body: RegisterMerchantDto,
+  ): Promise<Observable<RegisterMerchantResponse>> {
+    return this.svc.registerMerchant(body);
   }
 }
