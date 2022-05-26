@@ -9,7 +9,6 @@ import {
 } from './auth.dto';
 import {
   AuthServiceClient,
-  AUTH_PACKAGE_NAME,
   AUTH_SERVICE_NAME,
   LoginRequest,
   LoginResponse,

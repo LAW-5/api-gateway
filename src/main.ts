@@ -10,6 +10,16 @@ async function bootstrap() {
     .setTitle('Mangotree Api Specs')
     .setDescription('Collection of api spec for mangotree backend')
     .setVersion('1.0')
+    .addBearerAuth(
+      {
+        name: 'authorization',
+        bearerFormat: 'Bearer',
+        scheme: 'Bearer',
+        type: 'http',
+        in: 'Header',
+      },
+      'access-token',
+    )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
