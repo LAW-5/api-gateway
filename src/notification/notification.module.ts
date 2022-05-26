@@ -5,6 +5,7 @@ import {
   NOTIFICATION_PACKAGE_NAME,
   NOTIFICATION_SERVICE_NAME,
 } from './notification.pb';
+import 'dotenv/config';
 
 @Module({
   imports: [

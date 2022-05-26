@@ -21,7 +21,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "proto:install": "npm i git+https://github.com/LAW-5/protobuf",
     "proto:auth": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto -I=./node_modules/proto/ --ts_proto_out=src/auth/ node_modules/proto/auth.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
-    "proto:notif": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto -I=./node_modules/proto/ --ts_proto_out=src/notification/ node_modules/proto/notification.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb"
+    "proto:notif": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto -I=./node_modules/proto/ --ts_proto_out=src/notification/ node_modules/proto/notification.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
+    "proto:promo": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto -I=./node_modules/proto/ --ts_proto_out=src/promo/ node_modules/proto/promo.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.6.7",
@@ -31,6 +32,7 @@
     "@nestjs/microservices": "^8.4.4",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/swagger": "^5.2.1",
+    "dotenv": "^16.0.1",
     "proto": "github:LAW-5/protobuf",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

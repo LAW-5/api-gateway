@@ -7,12 +7,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
-import {
-  ApiBearerAuth,
-  ApiHeader,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
 import { AuthGuard } from 'src/auth/auth.guard';
 import {
