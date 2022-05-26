@@ -3,6 +3,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AuthController } from './auth.controller';
 import { AUTH_PACKAGE_NAME, AUTH_SERVICE_NAME } from './auth.pb';
 import { AuthService } from './auth.service';
+import 'dotenv/config';
 
 @Global()
 @Module({
