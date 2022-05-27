@@ -11,7 +11,7 @@ import 'dotenv/config';
         name: PRODUCT_SERVICE_NAME,
         transport: Transport.GRPC,
         options: {
-          url: process.env.PROMO_SERVICE,
+          url: process.env.PRODUCT_SERVICE,
           package: PRODUCT_PACKAGE_NAME,
           protoPath: 'node_modules/proto/product.proto',
         },
