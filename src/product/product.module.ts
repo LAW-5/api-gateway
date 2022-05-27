@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { PROMO_PACKAGE_NAME } from 'src/promo/promo.pb';
 import { ProductController } from './product.controller';
-import { PRODUCT_SERVICE_NAME } from './product.pb';
+import { PRODUCT_PACKAGE_NAME, PRODUCT_SERVICE_NAME } from './product.pb';
 
 @Module({
   imports: [
@@ -12,7 +11,7 @@ import { PRODUCT_SERVICE_NAME } from './product.pb';
         transport: Transport.GRPC,
         options: {
           url: process.env.PROMO_SERVICE,
-          package: PROMO_PACKAGE_NAME,
+          package: PRODUCT_PACKAGE_NAME,
           protoPath: 'node_modules/proto/product.proto',
         },
       },
@@ -20,4 +19,4 @@ import { PRODUCT_SERVICE_NAME } from './product.pb';
   ],
   controllers: [ProductController],
 })
-export class PromoModule {}
+export class ProductModule {}
