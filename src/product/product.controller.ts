@@ -12,26 +12,32 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
-import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Observable } from 'rxjs';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiParam,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
+import { EMPTY, Observable } from 'rxjs';
 import { AuthGuard } from 'src/auth/auth.guard';
 import {
   CreateProductDto,
-  CreateProductPayload,
   DeleteProductDto,
-  GetProductDto,
-  ListProductDto,
-  UpdateProductDto,
-  UpdateProductPayload,
+  EditProductDto,
+  ListMerchantProductDto,
+  ProductDetailDto,
+  SearchProductDto,
 } from './product.dto';
 import {
   CreateProductResponse,
   DeleteProductResponse,
-  GetProductResponse,
+  EditProductResponse,
   ListProductResponse,
+  ProductDetailResponse,
   ProductServiceClient,
   PRODUCT_SERVICE_NAME,
-  UpdateProductResponse,
+  SearchProductResponse,
 } from './product.pb';
 
 @ApiTags('product')
@@ -52,61 +58,80 @@ export class ProductController implements OnModuleInit {
   @UseGuards(AuthGuard)
   @ApiBody({ description: 'Create product dto', type: CreateProductDto })
   @ApiResponse({ status: 201, description: 'Succesfully create product' })
-  private async create(
+  private async createProduct(
     @Body() body: CreateProductDto,
     @Req() req: any,
   ): Promise<Observable<CreateProductResponse>> {
-    const payload: CreateProductPayload = { ...body, merchantId: req.user };
+    const payload: CreateProductDto = { ...body, merchantId: req.user };
     return this.svc.createProduct(payload);
   }
 
   @Get('')
   @ApiBearerAuth('access-token')
   @UseGuards(AuthGuard)
-  @ApiResponse({ status: 201, description: 'List product of given merchant' })
-  private async list(
+  @ApiResponse({ status: 201, description: 'List all product' })
+  private async listProduct(): Promise<Observable<ListProductResponse>> {
+    return this.svc.listProduct('');
+  }
+
+  @Get('merchant')
+  @ApiBearerAuth('access-token')
+  @UseGuards(AuthGuard)
+  @ApiResponse({ status: 201, description: 'List all merchant product' })
+  private async listMerchantProduct(
     @Req() req: any,
   ): Promise<Observable<ListProductResponse>> {
-    const payload: ListProductDto = { merchantId: req.user };
-    return this.svc.listProduct(payload);
+    const payload: ListMerchantProductDto = { id: req.user };
+    return this.svc.listMerchantProduct(payload);
   }
 
   @Get('/:id')
   @ApiBearerAuth('access-token')
   @UseGuards(AuthGuard)
-  @ApiResponse({ status: 201, description: 'Get product of given merchant' })
+  @ApiResponse({ status: 201, description: 'Get product detail' })
   @ApiResponse({ status: 404, description: 'Product not found' })
-  private async get(
-    @Req() req: any,
+  private async productDetail(
     @Param('id') id: number,
-  ): Promise<Observable<GetProductResponse>> {
-    const param: GetProductDto = { id };
-    return this.svc.getProduct(param);
+  ): Promise<Observable<ProductDetailResponse>> {
+    const param: ProductDetailDto = { id };
+    return this.svc.productDetail(param);
   }
 
   @Put('/:id')
   @ApiBearerAuth('access-token')
   @UseGuards(AuthGuard)
-  @ApiBody({ description: 'Update product dto', type: CreateProductDto })
-  @ApiResponse({ status: 201, description: 'Succesfully update product' })
+  @ApiBody({ description: 'Edit product dto', type: EditProductDto })
+  @ApiResponse({ status: 201, description: 'Succesfully edit product' })
   @ApiResponse({ status: 404, description: 'Product not found' })
-  private async update(
-    @Body() body: UpdateProductDto,
+  private async editProduct(
+    @Body() body: EditProductDto,
     @Param('id') id: number,
-  ): Promise<Observable<UpdateProductResponse>> {
-    const payload: UpdateProductPayload = { id, ...body };
-    return this.svc.updateProduct(payload);
+  ): Promise<Observable<EditProductResponse>> {
+    const payload: EditProductDto = { ...body };
+    payload.id = id;
+    return this.svc.editProduct(payload);
   }
 
-  @Delete('')
+  @Delete('/:id')
   @ApiBearerAuth('access-token')
   @UseGuards(AuthGuard)
   @ApiBody({ description: 'Delete product dto', type: DeleteProductDto })
   @ApiResponse({ status: 201, description: 'Succesfully delete product' })
   @ApiResponse({ status: 404, description: 'Product not found' })
-  private async delete(
+  private async deleteProduct(
     @Body() body: DeleteProductDto,
   ): Promise<Observable<DeleteProductResponse>> {
     return this.svc.deleteProduct(body);
+  }
+
+  @Post('search')
+  @ApiBearerAuth('access-token')
+  @UseGuards(AuthGuard)
+  @ApiBody({ description: 'Search product dto', type: SearchProductDto })
+  @ApiResponse({ status: 201, description: 'Product found' })
+  private async searchProduct(
+    @Body() body: SearchProductDto,
+  ): Promise<Observable<SearchProductResponse>> {
+    return this.svc.searchProduct(body);
   }
 }

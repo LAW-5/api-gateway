@@ -15,56 +15,22 @@ export class CreateProductDto {
 
   @ApiProperty()
   description: string;
-}
 
-export class CreateProductPayload {
-  @ApiProperty()
-  merchantId: number;
-
-  @ApiProperty()
-  name: string;
-
-  @ApiProperty()
-  stock: number;
-
-  @ApiProperty()
-  price: number;
-
-  @ApiProperty()
-  imageUrl: string;
-
-  @ApiProperty()
-  description: string;
-}
-
-export class ListProductDto {
   @ApiProperty()
   merchantId: number;
 }
 
-export class GetProductDto {
+export class ListMerchantProductDto {
   @ApiProperty()
   id: number;
 }
 
-export class UpdateProductDto {
+export class ProductDetailDto {
   @ApiProperty()
-  name: string;
-
-  @ApiProperty()
-  stock: number;
-
-  @ApiProperty()
-  price: number;
-
-  @ApiProperty()
-  imageUrl: string;
-
-  @ApiProperty()
-  description: string;
+  id: number;
 }
 
-export class UpdateProductPayload {
+export class EditProductDto {
   @ApiProperty()
   id: number;
 
@@ -87,4 +53,9 @@ export class UpdateProductPayload {
 export class DeleteProductDto {
   @ApiProperty()
   id: number;
+}
+
+export class SearchProductDto {
+  @ApiProperty()
+  name: string;
 }
