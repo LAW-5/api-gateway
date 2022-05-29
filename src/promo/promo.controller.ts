@@ -50,7 +50,7 @@ export class PromoController implements OnModuleInit {
     @Body() body: CreatePromoDto,
     @Req() req: any,
   ): Promise<Observable<CreatePromoResponse>> {
-    let payload: CreatePromoPayload = { ...body, merchantId: req.user };
+    const payload: CreatePromoPayload = { ...body, merchantId: req.user };
     return this.svc.createPromo(payload);
   }
 
