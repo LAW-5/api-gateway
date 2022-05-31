@@ -5,6 +5,7 @@ import {
     Inject,
     OnModuleInit,
     Post,
+    Put,
     Req,
     UseGuards,
   } from '@nestjs/common';
@@ -71,7 +72,7 @@ import {
       return this.svc.listMerchantOrder(payload);
     }
   
-    @Post('edit')
+    @Put('')
     @ApiBearerAuth('access-token')
     @UseGuards(AuthGuard)
     @ApiBody({ description: 'Edit order dto', type: EditOrderDto })
