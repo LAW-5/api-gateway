@@ -78,7 +78,7 @@ import {
     @ApiBody({ description: 'Edit order dto', type: EditOrderDto })
     @ApiResponse({ status: 201, description: 'Succesfully edit order' })
     @ApiResponse({ status: 404, description: 'No order with given id' })
-    private async use(
+    private async editOrder(
       @Body() body: EditOrderDto,
     ): Promise<Observable<EditOrderResponse>> {
       return this.svc.editOrder(body);
