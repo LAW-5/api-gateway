@@ -37,12 +37,11 @@ export class PaymentController implements OnModuleInit {
   @Get('')
   @ApiBearerAuth('access-token')
   @UseGuards(AuthGuard)
-  @ApiBody({ description: 'Get Balance Detail DTO', type: BalanceDetailDto })
   @ApiResponse({ status: 200, description: 'Succesfully get balance detail' })
   private async getBalance(
-    @Req() req: BalanceDetailDto,
+    @Req() req: any,
   ): Promise<Observable<BalanceDetailResponse>> {
-    const payload: BalanceDetailDto = { id: req.id };
+    const payload: BalanceDetailDto = { id: req.user };
     return this.svc.getBalanceDetail(payload);
   }
 
