@@ -20,9 +20,6 @@ export class CreateOrderDto {
   promoId: number;
 
   @ApiProperty()
-  name: string;
-
-  @ApiProperty()
   orderStatus: string;
 }
 
@@ -44,9 +41,6 @@ export class CreateOrderPayload {
 
   @ApiProperty()
   address: string;
-
-  @ApiProperty()
-  name: string;
 
   @ApiProperty()
   promoId: number;
