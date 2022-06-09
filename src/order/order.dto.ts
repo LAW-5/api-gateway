@@ -14,7 +14,10 @@ export class CreateOrderDto {
   address: string;
 
   @ApiProperty()
-  promoId: number[];
+  promoId: number;
+
+  @ApiProperty()
+  name: string;
 
   @ApiProperty()
   orderStatus: string;
@@ -37,7 +40,10 @@ export class CreateOrderPayload {
   address: string;
 
   @ApiProperty()
-  promoId: number[];
+  name: string;
+
+  @ApiProperty()
+  promoId: number;
 
   @ApiProperty()
   orderStatus: string;
@@ -56,7 +62,7 @@ export class ListMerchantOrderDto {
 export class EditOrderDto {
   @ApiProperty()
   id: number;
-  
+
   @ApiProperty()
   orderStatus: string;
 }

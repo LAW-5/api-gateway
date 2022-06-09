@@ -11,8 +11,9 @@ export interface CreateOrderRequest {
   merchantId: number;
   productId: number;
   quantity: number;
+  name: string;
   address: string;
-  promoId: number[];
+  promoId: number;
   orderStatus: string;
 }
 
@@ -34,6 +35,7 @@ export interface Order {
   orderStatus: string;
   productId: number;
   quantity: number;
+  name: string;
   address: string;
 }
 
