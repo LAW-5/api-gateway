@@ -38,7 +38,6 @@ export interface Order {
   name: string;
   address: string;
 }
-
 export interface ListOrderResponse {
   data: Order[];
   status: number;

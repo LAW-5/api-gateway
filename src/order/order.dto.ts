@@ -11,6 +11,9 @@ export class CreateOrderDto {
   quantity: number;
 
   @ApiProperty()
+  name: string;
+
+  @ApiProperty()
   address: string;
 
   @ApiProperty()
@@ -35,6 +38,9 @@ export class CreateOrderPayload {
 
   @ApiProperty()
   quantity: number;
+
+  @ApiProperty()
+  name: string;
 
   @ApiProperty()
   address: string;
