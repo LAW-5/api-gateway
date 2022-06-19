@@ -5,19 +5,19 @@ export class CreateOrderDto {
   merchantId: number;
 
   @ApiProperty()
-  productId: number;
+  productId: number[];
 
   @ApiProperty()
-  quantity: number;
+  quantity: number[];
+
+  @ApiProperty()
+  totalPrice: number;
 
   @ApiProperty()
   name: string;
 
   @ApiProperty()
   address: string;
-
-  @ApiProperty()
-  promoId: number;
 
   @ApiProperty()
   orderStatus: string;
@@ -31,19 +31,19 @@ export class CreateOrderPayload {
   merchantId: number;
 
   @ApiProperty()
-  productId: number;
+  productId: number[];
 
   @ApiProperty()
-  quantity: number;
+  quantity: number[];
+  
+  @ApiProperty()
+  totalPrice: number;
 
   @ApiProperty()
   name: string;
 
   @ApiProperty()
   address: string;
-
-  @ApiProperty()
-  promoId: number;
 
   @ApiProperty()
   orderStatus: string;
