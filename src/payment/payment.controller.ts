@@ -51,13 +51,9 @@ export class PaymentController implements OnModuleInit {
   @ApiBody({ description: 'Top up dto', type: TopUpDto })
   @ApiResponse({ status: 201, description: 'Successfully top up' })
   private async topUp(
-    @Req() req: any,
     @Body() body: TopUpDto,
   ): Promise<Observable<TopUpResponse>> {
-    return this.svc.topUp({
-      ...body,
-      id: req.user,
-    });
+    return this.svc.topUp(body);
   }
 
   @Post('decrease-balance')
@@ -66,12 +62,8 @@ export class PaymentController implements OnModuleInit {
   @ApiBody({ description: 'Decrease Balance dto', type: DecreaseBalanceDto })
   @ApiResponse({ status: 201, description: 'Successfully Decrease Balance' })
   private async decreaseBalance(
-    @Req() req: any,
     @Body() body: DecreaseBalanceDto,
   ): Promise<Observable<DecreaseBalanceResponse>> {
-    return this.svc.decreaseBalance({
-      ...body,
-      id: req.user,
-    });
+    return this.svc.decreaseBalance(body);
   }
 }

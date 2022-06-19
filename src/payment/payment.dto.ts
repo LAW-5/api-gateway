@@ -7,10 +7,16 @@ export class BalanceDetailDto {
 
 export class TopUpDto {
   @ApiProperty()
+  id: number;
+
+  @ApiProperty()
   amount: number;
 }
 
 export class DecreaseBalanceDto {
+  @ApiProperty()
+  id: number;
+
   @ApiProperty()
   amount: number;
 }
