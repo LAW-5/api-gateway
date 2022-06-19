@@ -5,6 +5,7 @@ import {
   Get,
   Inject,
   OnModuleInit,
+  Param,
   Post,
   Req,
   UseGuards,
@@ -54,12 +55,14 @@ export class PromoController implements OnModuleInit {
     return this.svc.createPromo(payload);
   }
 
-  @Get('')
+  @Get('/:merchantId')
   @ApiBearerAuth('access-token')
   @UseGuards(AuthGuard)
   @ApiResponse({ status: 201, description: 'List promo of given merchant' })
-  private async list(@Req() req: any): Promise<Observable<ListPromoResponse>> {
-    const payload: ListPromoDto = { merchantId: req.user };
+  private async list(
+    @Param('merchantId') merchantId,
+  ): Promise<Observable<ListPromoResponse>> {
+    const payload: ListPromoDto = { merchantId };
     return this.svc.listPromo(payload);
   }
 
